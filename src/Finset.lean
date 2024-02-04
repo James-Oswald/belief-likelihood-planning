@@ -58,11 +58,7 @@ instance : Membership α (Finset α) := ⟨(· ∈ ·.members)⟩
 
 def Finset.equals (f1 f2 : Finset α) : Prop := f1 ⊆ f2 ∧ f2 ⊆ f1
 
-instance : Eq (Finset α) := ⟨Finset.equals⟩
-
-#check DecidableEq
-
-def Finset.decEq_finset [DecidableEq α] (f1 f2 : Finset α) :
+instance Finset.decEq_finset [DecidableEq α] (f1 f2 : Finset α) :
 Decidable (Finset.equals f1 f2) := by
   have H : @DecidableRel (List α) (· ⊆ ·) := inferInstance
   have H1 : Decidable (f1 ⊆ f2) := H f1 f2
@@ -70,11 +66,7 @@ Decidable (Finset.equals f1 f2) := by
   have H3 : Decidable (f1 ⊆ f2 ∧ f2 ⊆ f1) := inferInstance
   assumption
 
-instance [DecidableEq α] (f1 f2 : Finset α) :
-DecideableEq Finset.equals :=
-
-
-instance [BEq α] : BEq (Finset α) := ⟨Finset.equals⟩
+instance [DecidableEq α] : BEq (Finset α) := ⟨λf1 f2 => decide (Finset.equals f1 f2)⟩
 
 def Finset.map {α β : Type} [BEq β] [LawfulBEq β] (f : α -> β) (s : Finset α) : Finset β :=
   ⟨List.mapNodup f s, List.mapNodup_Nodup f s⟩

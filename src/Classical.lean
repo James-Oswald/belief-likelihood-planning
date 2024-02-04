@@ -19,6 +19,4 @@ structure CPP where
 def CPP.ActionNames (π : CPP) : Finset String :=
   π.Actions.map Action.Name
 
-def Plan (π : CPP) : Type := List Action (Facts π)
-
-#check CPP.mk
+--def Plan (π : CPP) : Type := List Action (Facts π)
