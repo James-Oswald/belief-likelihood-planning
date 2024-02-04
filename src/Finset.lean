@@ -1,15 +1,15 @@
 /-
 This file contains the definition of a Finsubset
 as well as some custom machinery and theorems for Finsets
+
+Author: James Oswald
 -/
 
 import Mathlib.Data.Finset.Basic
 
 /-
-It is not obvious at all but Finset.Sort is what
-allows you to actually convert a Finset to a List
-in a computable way, Finset.toList is a psyop.
-Also has a Repr instance.
+Finset.Sort is what allows you to actually convert a Finset to a List
+in a computable way, Finset.toList is a psyop. Also has a Repr instance.
 -/
 import Mathlib.Data.Finset.Sort
 
@@ -34,7 +34,8 @@ instance Finsubset.Beq [DecidableEq α] {x : Finset α} : BEq (Finsubset x) :=
 instance {F : Finset String} : BEq (Finsubset F) := by exact Finsubset.Beq
 
 --Subset Instances
-def Finsubset.Subset {F : Finset α} (S1 S2: Finsubset F) : Prop := S1.subset ⊆ S2.subset
+def Finsubset.Subset {F : Finset α} (S1 S2: Finsubset F) : Prop :=
+  S1.subset ⊆ S2.subset
 
 instance : HasSubset (Finsubset α) := ⟨Finsubset.Subset⟩
 

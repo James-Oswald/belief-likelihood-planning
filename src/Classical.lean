@@ -21,8 +21,8 @@ structure Plan (π : PlanProblem) where
   l : List (Action π.F)
   h : ∀ a ∈ l, a ∈ π.A
 
---Plan applicability defines the semantics of what it means to be a plan.
-def PlanApplicable (π : PlanProblem) (p : Plan π) : Prop :=
+--Plan validity defines the semantics of what it means to be a plan.
+def ValidPlan (π : PlanProblem) (p : Plan π) : Prop :=
   let rec loop (π : PlanProblem) (p : Plan π) (s : Finsubset π.F) : Prop :=
     match p with
     | ⟨[], _⟩  => s ∈ π.G

@@ -28,13 +28,12 @@ inductive Situation
   | Var : SituationIdent -> Situation
   | Term : SituationIdent -> List Object -> Situation
 
-def DoAction := Sum (List Action) Action
-instance : Coe (List Action) DoAction := ⟨Sum.inl⟩
-instance : Coe Action DoAction := ⟨Sum.inr⟩
-
 /- To enhance readability, we will sometimes write
 do([a1, . . . , an], s) instead of
 do(an, do(an−1, . . . , do(a1, S0). . .) -/
+def DoAction := Sum (List Action) Action
+instance : Coe (List Action) DoAction := ⟨Sum.inl⟩
+instance : Coe Action DoAction := ⟨Sum.inr⟩
 def Do (as : DoAction) (si : Situation) : Situation :=
 match as with
 | Sum.inl as => as.foldl (fun sn a => Situation.Do a sn) si
