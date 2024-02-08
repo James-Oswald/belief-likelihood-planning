@@ -13,7 +13,6 @@ in a computable way, Finset.toList is a psyop. Also has a Repr instance.
 -/
 import Mathlib.Data.Finset.Sort
 
-
 theorem Finset.self_subset {F : Finset α} : F ⊆ F := by
   intro x
   exact id
